@@ -1,0 +1,91 @@
+from django.shortcuts import render,HttpResponse,HttpResponseRedirect,reverse
+from .forms import InvoiceForm,SearchByDateForm
+from .models import Invoice,Room
+from .utilities import gen_duesbill,gen_moneyreciept, gen_inv_cc,gen_inv_hc
+from datetime import datetime
+# Create your views here.
+
+def profile_menu(request):
+    return render(request, 'profile_menu.html')
+
+def make_duesbill(request):
+    if request.method=='POST':
+        print(request.POST)
+        gen_duesbill(request)
+        return HttpResponseRedirect(reverse('imageview')+"?i=duebill.jpeg")
+    return render(request,'make_duesbill.html')
+
+def make_moneyreciept(request):
+    if request.method=='POST':
+        gen_moneyreciept(request)
+        return HttpResponseRedirect(reverse('imageview')+"?i=moneyreciept.jpeg")
+    return render(request,'make_moneyreciept.html')
+
+
+def image_view(request):
+    return render(request,'imageview.html',{'img':request.GET.get('i',""),'time':datetime.now()})
+
+
+
+
+
+def add_invoice(request):
+    rooms = Room.objects.all()
+    if request.method=="POST":
+        form = InvoiceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print(reverse('invoicedetail',args=[form.cleaned_data['invoice_no']]))
+            return HttpResponseRedirect(reverse('invoicedetail',args=[form.cleaned_data['invoice_no']]))
+        return render(request,'invoiceform.html',{'tag':"Add Invoice",'form':form,'rooms':rooms})
+    return render(request,'invoiceform.html',{'tag':"Add Invoice",'form':InvoiceForm(),'rooms':rooms})
+
+def invoice_detail(request,no):
+    obj = Invoice.objects.get(invoice_no=no)
+    return render(request,'invoicedetail.html',{'obj':obj})
+
+def edit_invoice(request,pk):
+    invoice = Invoice.objects.get(pk=pk)
+    form = InvoiceForm(instance=invoice)
+    if request.method=="POST":
+        form = InvoiceForm(request.POST,instance=invoice)
+        if form.is_valid():
+            form.save()
+            return render(request,'invoiceform.html',{'tag':"Edit Invoice",'msg':"Invoice Updated in Database",'form':form,'invoice_no':invoice.invoice_no})
+
+    return render(request,'invoiceform.html',{'tag':"Edit Invoice",'form':form,'invoice_no':invoice.invoice_no})
+
+
+def view_invoice(request):
+    objects = Invoice.objects.all()
+    return render(request,'viewinvoice.html',{'objects':objects})
+
+
+def print_inv_cc(request,invoice_no):
+    invoice = Invoice.objects.get(invoice_no=invoice_no)
+    gen_inv_cc(invoice)
+    return HttpResponseRedirect(reverse('imageview')+"?i=invcc.jpeg")
+
+def print_inv_hc(request,invoice_no):
+    invoice = Invoice.objects.get(invoice_no=invoice_no)
+    gen_inv_hc(invoice)
+    return HttpResponseRedirect(reverse('imageview')+"?i=invhc.jpeg")
+
+
+def search_invoice(request):
+    if request.method=="POST":
+        form = SearchByDateForm(request.POST)
+        if form.is_valid():
+            print("tada...."*3)
+            objects = Invoice.objects.filter(date__range=(form.cleaned_data['fdate'],form.cleaned_data['tdate']))
+            total=0
+            for t in objects: total = total+t.total_with_gst() 
+            return render(request,'searchinvoice.html',{'objects':objects,'total':total})
+    return render(request,'searchinvoice.html')
+
+
+def searchbyno(request):
+    if request.method=="POST":
+        obj = Invoice.objects.get(invoice_no=request.POST['invoice_no'])
+        return render(request,'searchbyno.html',{'obj':obj})
+    return render(request,'searchbyno.html')

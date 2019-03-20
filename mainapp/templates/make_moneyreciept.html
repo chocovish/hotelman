@@ -1,0 +1,27 @@
+{% extends 'master.html' %}
+
+{% block content %}
+<div class="container mt-2">
+  <h3 class="text-center m-3 mb-5">Money Reciept</h3>
+<form method="POST">
+  {% csrf_token %}
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputname4">Name</label>
+        <input type="text" class="form-control" id="inputname4" placeholder="Name" name="name" required>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="roomno">Room No.</label>
+        <input type="number" class="form-control" id="roomno" placeholder="Room No." name="room" required>
+      </div>
+      <div class="form-group col-md-3">
+          <label for="amount">Amount</label>
+          <input type="number" class="form-control" id="amount" placeholder="Amount" name="amount" required>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg px-5 mr-3">Generate</button>
+    <button type="reset" class="btn btn-secondary btn-lg px-5">Reset</button>
+  </form>
+</div>
+{% endblock %}

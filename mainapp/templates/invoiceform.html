@@ -1,0 +1,51 @@
+{% extends 'master.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <h3 class="text-center">{{tag}}</h3>
+    {% if msg %} <div class="alert alert-success">{{msg}}</div> {% endif %}
+<form action="" method="post" class="form-row">
+    {% csrf_token %}
+    <div class="col-4">
+            {{form.invoice_no | as_crispy_field}}
+            {{form.name | as_crispy_field}}
+            {{form.company_name | as_crispy_field}}
+            {{form.gstin | as_crispy_field}}
+            {{form.rate | as_crispy_field}}
+
+    </div>
+    <div class="col-4">
+            {{form.date | as_crispy_field}}
+            {{form.room_no | as_crispy_field}}
+            {{form.check_in | as_crispy_field}}
+            {{form.check_out | as_crispy_field}}
+            {{form.days_count | as_crispy_field}}
+    </div>
+    <div class="col-4">
+        {{form.address | as_crispy_field}}
+        {{form.phone | as_crispy_field}}
+        {{form.person_count | as_crispy_field}}
+
+        {{form.discount | as_crispy_field}}
+        {{form.is_gst | as_crispy_field}}
+    </div>
+    <div class="container">
+    <div class="row justify-content-end">
+        <button class="btn btn-lg btn-secondary mr-2" type="submit">Save</button>
+ <!-- {% if invoice_no %}<a href="{% url 'printinvcc' invoice_no %}" class="btn btn-lg btn-secondary mr-2" target="_blank">Print Customer Copy</a>{% endif %} -->
+        {% if invoice_no %}<a href="{% url 'printinvhc' invoice_no %}" class="btn btn-lg btn-secondary" target="_blank">Print Hotel Copy</a>{% endif %}
+    </div>
+    </div>
+    
+<datalist id="rooms">
+    {% for room in rooms %}
+<option value="{{room.room_no}}">{{room}}</option>
+    {% endfor %}
+</datalist>
+
+</form>
+
+</div>
+{% endblock %}
