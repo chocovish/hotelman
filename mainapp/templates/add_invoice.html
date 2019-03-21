@@ -1,101 +1,64 @@
 {% extends 'master.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
-<div class="container mt-2">
-  <h3 class="text-center m-3 mb-5">{{ tag }} </h3>
-  {% if msg %}<div class="alert alert-success">{{msg}}</div> {% endif %}
-<form method="POST">
-  {% csrf_token %}
-  <div class="row">
-      <div class="col-6">
+<div class="container">
+    <h3 class="text-center">{{tag}}</h3>
+    {% if msg %} <div class="alert alert-success">{{msg}}</div> {% endif %}
+<form action="" method="post" class="form-row">
+    {% csrf_token %}
+        <div class="col-4">{{form.invoice_no | as_crispy_field}}</div>
+        <div class="col-4">{{form.date | as_crispy_field}}</div>
+        <div class="col-4">{{form.person_count | as_crispy_field}}</div>
+        
+        <div class="col-3">{{form.name | as_crispy_field}}</div>
+        <div class="col-6">{{form.address | as_crispy_field}}</div>
+        <div class="col-3">{{form.phone | as_crispy_field}}</div>
+        <div class="col-6">{{form.company_name | as_crispy_field}}</div>
+        <div class="col-6">{{form.gstin | as_crispy_field}}</div>
+        
 
-    <div class="form-row">
-      <div class="form-group col-12">
-          <label for="invoice_no">Invoice No.</label>
-          <input type="text" class="form-control" id="invoice_no" placeholder="Invoice No." name="invoice_no" required>
-        </div>
-      <div class="form-group col-12">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
-      </div>
-      <div class="form-group col-12">
-        <label for="compname">Company Name</label>
-        <input type="text" class="form-control" id="compname" placeholder="Company Name" name="company_name">
-      </div>
-      <div class="form-group col-12">
-        <label for="address">Address</label>
-        <input type="text" class="form-control" id="address" placeholder="Address" name="address" required>
-      </div>
-      <div class="form-group col-12">
-          <label for="mobile">Mobile No.</label>
-          <input type="text" class="form-control" id="mobile" placeholder="Mobile No" name="phone" required>
-        </div>
+
+        <div class="col-2">{{form.room_no | as_crispy_field}}</div>
+        <div class="col-2">{{form.rate | as_crispy_field}}</div>
+        <div class="col-2">{{form.days_count | as_crispy_field}}</div>
+        <div class="col-3">{{form.check_in | as_crispy_field}}</div>
+        <div class="col-3">{{form.check_out | as_crispy_field}}</div>
+
+        <div class="col-2">{{form.room_no_2 | as_crispy_field}}</div>
+        <div class="col-2">{{form.rate_2 | as_crispy_field}}</div>
+        <div class="col-2">{{form.days_count_2 | as_crispy_field}}</div>
+        <div class="col-3">{{form.check_in_2 | as_crispy_field}}</div>
+        <div class="col-3">{{form.check_out_2 | as_crispy_field}}</div>
+
+        <div class="col-2">{{form.room_no_3 | as_crispy_field}}</div>
+        <div class="col-2">{{form.rate_3 | as_crispy_field}}</div>
+        <div class="col-2">{{form.days_count_3 | as_crispy_field}}</div>
+        <div class="col-3">{{form.check_in_3 | as_crispy_field}}</div>
+        <div class="col-3">{{form.check_out_3 | as_crispy_field}}</div>
+        
+    
+        <div class="col-4">{{form.discount | as_crispy_field}}</div>
+        <div class="col-4 mt-4">{{form.is_gst | as_crispy_field}}</div>
+        
+        
+
+    <div class="container">
+    <div class="row justify-content-end">
+        <button class="btn btn-lg btn-secondary mr-2" type="submit">Save</button>
+ <!-- {% if invoice_no %}<a href="{% url 'printinvcc' invoice_no %}" class="btn btn-lg btn-secondary mr-2" target="_blank">Print Customer Copy</a>{% endif %} -->
+        {% if invoice_no %}<a href="{% url 'printinvhc' invoice_no %}" class="btn btn-lg btn-secondary" target="_blank">Print Hotel Copy</a>{% endif %}
     </div>
-
-    <div class="form-row">
-        <div class="form-group col-12">
-            <label for="personno">No. of person</label>
-            <input type="number" class="form-control" id="personno" placeholder="No. of person" name="person_count" required>
-          </div>
-        <div class="form-group col-12">
-          <label for="gstin">GSTIN</label>
-          <input type="text" class="form-control" id="gstin" placeholder="GSTIN" name="gstin">
-        </div>
-        <div class="form-group">
-          <div id="div_id_is_gst" class="form-check">
-            <label for="id_is_gst" class="form-check-label">
-              <input type="checkbox" name="is_gst" class="checkboxinput form-check-input" id="id_is_gst">
-                Is gst
-            </label>     
-         </div>
-        </div>
-
-
-      </div>
- 
     </div>
-    <div class="col-6">
+    
+<datalist id="rooms">
+    {% for room in rooms %}
+<option value="{{room.room_no}}">{{room}}</option>
+    {% endfor %}
+</datalist>
 
-    <div class="form-row">
-        <div class="form-group col-12">
-            <label for="date">Date</label>
-            <input type="date" class="form-control" id="date" placeholder="Date" name="date" required>
-          </div>
-        <div class="form-group col-12">
-          <label for="roomno">Room No.</label>
-          <input type="text" class="form-control" id="roomno" placeholder="room No" name="room_no" required>
-        </div>
-        <div class="form-group col-12">
-          <label for="dcheckin">Check in Date</label>
-          <input type="date" class="form-control" id="dcheckin" placeholder="Checkin date" name="check_in" required>
-        </div>
+</form>
 
-        <div class="form-group col-12">
-            <label for="dcheckout">Check out Date</label>
-            <input type="date" class="form-control" id="dcheckout" placeholder="Checkout date" name="check_out" required>
-          </div>
-
-          <div class="form-group col-12">
-            <label for="nightno">No. of Days</label>
-            <input type="number" class="form-control" id="nightno" placeholder="No. of night" name="days_count" required>
-          </div>
-
-          <div class="form-group col-12">
-            <label for="rate">Price per Night</label>
-            <input type="number" class="form-control" id="rate" placeholder="Price per Night" name="rate" required>
-          </div>
-
-          <div class="form-group col-12">
-            <label for="discount">Discount</label>
-            <input type="number" class="form-control" id="discount" placeholder="discount" name="discount" required>
-          </div>
-    </div>
-
-    </div>
-</div>
-
-    <button type="submit" class="btn btn-primary btn-lg px-5 mr-3">Generate</button>
-    <button type="reset" class="btn btn-secondary btn-lg px-5">Reset</button>
-  </form>
 </div>
 {% endblock %}

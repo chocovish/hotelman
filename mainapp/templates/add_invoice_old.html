@@ -1,0 +1,101 @@
+{% extends 'master.html' %}
+
+{% block content %}
+<div class="container mt-2">
+  <h3 class="text-center m-3 mb-5">{{ tag }} </h3>
+  {% if msg %}<div class="alert alert-success">{{msg}}</div> {% endif %}
+<form method="POST">
+  {% csrf_token %}
+  <div class="row">
+      <div class="col-6">
+
+    <div class="form-row">
+      <div class="form-group col-12">
+          <label for="invoice_no">Invoice No.</label>
+          <input type="text" class="form-control" id="invoice_no" placeholder="Invoice No." name="invoice_no" required>
+        </div>
+      <div class="form-group col-12">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
+      </div>
+      <div class="form-group col-12">
+        <label for="compname">Company Name</label>
+        <input type="text" class="form-control" id="compname" placeholder="Company Name" name="company_name">
+      </div>
+      <div class="form-group col-12">
+        <label for="address">Address</label>
+        <input type="text" class="form-control" id="address" placeholder="Address" name="address" required>
+      </div>
+      <div class="form-group col-12">
+          <label for="mobile">Mobile No.</label>
+          <input type="text" class="form-control" id="mobile" placeholder="Mobile No" name="phone" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-12">
+            <label for="personno">No. of person</label>
+            <input type="number" class="form-control" id="personno" placeholder="No. of person" name="person_count" required>
+          </div>
+        <div class="form-group col-12">
+          <label for="gstin">GSTIN</label>
+          <input type="text" class="form-control" id="gstin" placeholder="GSTIN" name="gstin">
+        </div>
+        <div class="form-group">
+          <div id="div_id_is_gst" class="form-check">
+            <label for="id_is_gst" class="form-check-label">
+              <input type="checkbox" name="is_gst" class="checkboxinput form-check-input" id="id_is_gst">
+                Is gst
+            </label>     
+         </div>
+        </div>
+
+
+      </div>
+ 
+    </div>
+    <div class="col-6">
+
+    <div class="form-row">
+        <div class="form-group col-12">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" id="date" placeholder="Date" name="date" required>
+          </div>
+        <div class="form-group col-12">
+          <label for="roomno">Room No.</label>
+          <input type="text" class="form-control" id="roomno" placeholder="room No" name="room_no" required>
+        </div>
+        <div class="form-group col-12">
+          <label for="dcheckin">Check in Date</label>
+          <input type="date" class="form-control" id="dcheckin" placeholder="Checkin date" name="check_in" required>
+        </div>
+
+        <div class="form-group col-12">
+            <label for="dcheckout">Check out Date</label>
+            <input type="date" class="form-control" id="dcheckout" placeholder="Checkout date" name="check_out" required>
+          </div>
+
+          <div class="form-group col-12">
+            <label for="nightno">No. of Days</label>
+            <input type="number" class="form-control" id="nightno" placeholder="No. of night" name="days_count" required>
+          </div>
+
+          <div class="form-group col-12">
+            <label for="rate">Price per Night</label>
+            <input type="number" class="form-control" id="rate" placeholder="Price per Night" name="rate" required>
+          </div>
+
+          <div class="form-group col-12">
+            <label for="discount">Discount</label>
+            <input type="number" class="form-control" id="discount" placeholder="discount" name="discount" required>
+          </div>
+    </div>
+
+    </div>
+</div>
+
+    <button type="submit" class="btn btn-primary btn-lg px-5 mr-3">Generate</button>
+    <button type="reset" class="btn btn-secondary btn-lg px-5">Reset</button>
+  </form>
+</div>
+{% endblock %}
