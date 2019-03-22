@@ -11,9 +11,9 @@ class Room(models.Model):
 class Invoice(models.Model):
     invoice_no = models.CharField(max_length=10)
     name = models.CharField(max_length=30)
-    company_name = models.CharField(max_length=30,blank=True)
-    address = models.CharField(max_length=60)
-    phone = models.CharField(max_length=13)
+    company_name = models.CharField(max_length=30,null=True,blank=True)
+    address = models.CharField(max_length=60,null=True,blank=True)
+    phone = models.CharField(max_length=13,null=True,blank=True)
     person_count = models.CharField(max_length=30)
     gstin = models.CharField(max_length=30,blank=True,null=True)
     date = models.DateField()
@@ -32,7 +32,7 @@ class Invoice(models.Model):
 
     def total(self): return (self.rate*self.days_count)-self.discount
     
-    def total_with_gst(self): return self.total() + self.gst()
+    def total_with_gst(self): return self.total() + self.gst()*2
     
     
     def __str__(self): return self.name+ " " + self.room_no
