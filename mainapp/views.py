@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect,reverse
 from .forms import InvoiceForm,SearchByDateForm
 from .models import Invoice,Room
-from .utilities import gen_duesbill,gen_inv
+from .utilities import gen_duesbill,gen_moneyreciept,gen_inv
 from datetime import datetime
 
 
