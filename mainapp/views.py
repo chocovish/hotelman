@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect,reverse
 from .forms import InvoiceForm,SearchByDateForm
-from .models import Invoice,Room
+from .models import Invoice,Room,Count
 from .utilities import gen_duesbill,gen_moneyreciept,gen_inv
 from datetime import datetime
 
@@ -39,7 +39,7 @@ def add_invoice(request):
             print(reverse('invoicedetail',args=[form.cleaned_data['invoice_no']]))
             return HttpResponseRedirect(reverse('invoicedetail',args=[form.cleaned_data['invoice_no']]))
         return render(request,'invoiceform.html',{'tag':"Add Invoice",'form':form,'rooms':rooms})
-    return render(request,'add_invoice.html',{'tag':"Add Invoice",'form':InvoiceForm(),'rooms':rooms})
+    return render(request,'invoiceform.html',{'tag':"Add Invoice",'form':InvoiceForm(),'rooms':rooms})
 
 def invoice_detail(request,no):
     obj = Invoice.objects.get(invoice_no=no)

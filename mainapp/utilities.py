@@ -1,6 +1,6 @@
 from PIL import Image,ImageDraw,ImageFont
 from num2words import num2words
-from .models import Room
+from .models import Room,Count
 
 def dateformat(date):
     date = str(date).split("-")
@@ -32,10 +32,11 @@ def gen_duesbill(request):
         im.save("mainapp/static/duebill.jpeg")
 
 def gen_moneyreciept(request):
+    count = Count.objects.first()
     name = request.POST.get("name","xyz123")
     amount = request.POST.get("amount","00")
     room = request.POST.get("room","000")
-    recieptno = request.POST.get("recieptno","000")
+    recieptno = str(count.value+1)
     date = request.POST.get("date")
         
     with Image.open("moneyreciept.jpg") as im:
@@ -48,6 +49,8 @@ def gen_moneyreciept(request):
         draw.text((356,284),recieptno,fill="rgb(0,0,0)",font=font)
         draw.text((455,745),num2words(int(amount)) + " only",fill="rgb(0,0,0)",font=font)
         im.save("mainapp/static/moneyreciept.jpeg")
+    count.value = count.value + 1
+    count.save()
 
 
 def gen_inv(o,copy='cc'):
@@ -109,7 +112,7 @@ def gen_inv(o,copy='cc'):
 
         draw.text((1280,759),str((o.total()+o.total_2()+o.total_3())/1),fill="rgb(0,0,0)",font=font)
         draw.text((1280,797),str(o.gst()),fill="rgb(0,0,0)",font=font)
-        draw.text((1280,835),str(o.gst()),fill="rgb(0,0,0)",font=font)
+        draw.text((1280,834),str(o.gst()),fill="rgb(0,0,0)",font=font)
         draw.text((1280,870),str(o.total_with_gst()),fill="rgb(0,0,0)",font=font)
         im.save(op)
 

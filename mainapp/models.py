@@ -48,11 +48,13 @@ class Invoice(models.Model):
         return gst
 
     def total(self): return (self.rate*self.days_count)
-    def total_2(self):
-        return (self.rate_2*self.days_count_2)
+    def total_2(self): return (self.rate_2*self.days_count_2)
     def total_3(self): return (self.rate_3*self.days_count_3)
     
     def total_with_gst(self): return (self.total() + self.total_2() + self.total_3() + self.gst()*2) - self.discount
     
-    
     def __str__(self): return self.name+ " " + self.room_no
+
+
+class Count(models.Model):
+    value = models.IntegerField()

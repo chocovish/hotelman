@@ -1,7 +1,7 @@
 import xlrd
 worksheet = xlrd.open_workbook("HII.xlsx").sheet_by_name("Sheet1")
 
-for row in range(63):
+for row in range(1,63):
     for col in range(1,3,2):
         room_no = worksheet.cell_value(row,col)
         details = worksheet.cell_value(row,col+1)
