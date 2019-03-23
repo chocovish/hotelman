@@ -42,12 +42,9 @@ class Invoice(models.Model):
 
     def gst(self):
         gst = 0
-        if self.rate>=1000:
-            gst = (self.days_count*self.rate)*6/100
-            if self.rate_2 >= 1000:
-                gst = gst + ((self.days_count_2*self.rate_2)*6/100)
-                if self.rate_3>=1000:
-                    gst = gst + ((self.days_count_3*self.rate_3)*6/100)
+        if self.rate>=1000: gst = (self.days_count*self.rate)*6/100
+        if self.rate_2 >= 1000: gst = gst + ((self.days_count_2*self.rate_2)*6/100)
+        if self.rate_3>=1000: gst = gst + ((self.days_count_3*self.rate_3)*6/100)
         return gst
 
     def total(self): return (self.rate*self.days_count)
