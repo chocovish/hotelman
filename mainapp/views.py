@@ -34,8 +34,6 @@ def add_invoice(request):
         form = InvoiceForm(request.POST)
         if form.is_valid():
             form.save()
-            form.save()
-            form.save()
             print(reverse('invoicedetail',args=[form.cleaned_data['invoice_no']]))
             return HttpResponseRedirect(reverse('invoicedetail',args=[form.cleaned_data['invoice_no']]))
         return render(request,'invoiceform.html',{'tag':"Add Invoice",'form':form,'rooms':rooms})
@@ -77,12 +75,11 @@ def search_invoice(request):
     if request.method=="POST":
         form = SearchByDateForm(request.POST)
         if form.is_valid():
-            print("tada...."*3)
             objects = Invoice.objects.filter(date__range=(form.cleaned_data['fdate'],form.cleaned_data['tdate']))
             wgst = 0
             wogst = 0
             for o in objects:
-                if o.rate>=1000: wgst = wgst+o.total_with_gst()
+                if o.is_gst==True: wgst = wgst+o.total_with_gst()
                 else: wogst = wogst+o.total_with_gst()
             return render(request,'searchinvoice.html',{'objects':objects,'total':wgst+wogst,'wgst':wgst,'wogst':wogst})
     return render(request,'searchinvoice.html')
