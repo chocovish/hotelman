@@ -115,8 +115,8 @@ def gen_inv(o,copy='cc'):
         draw.text((1280,834),str(o.gst()),fill="rgb(0,0,0)",font=font)
         draw.text((1280,870),str(o.total_with_gst()),fill="rgb(0,0,0)",font=font)
 
-        draw.text((184,759),str(o.check_in),fill="rgb(0,0,0)",font=font)
-        draw.text((661,759),str(o.final_checkout()),fill="rgb(0,0,0)",font=font)
+        draw.text((184,759),dateformat(o.check_in),fill="rgb(0,0,0)",font=font)
+        draw.text((661,759),dateformat(o.final_checkout()),fill="rgb(0,0,0)",font=font)
         draw.text((1122,921),str(o.remark),fill="rgb(0,0,0)",font=font)
         im.save(op)
 
