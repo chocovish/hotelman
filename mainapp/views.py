@@ -50,9 +50,9 @@ def edit_invoice(request,pk):
         form = InvoiceForm(request.POST,instance=invoice)
         if form.is_valid():
             form.save()
-            return render(request,'invoiceform.html',{'tag':"Edit Invoice",'msg':"Invoice Updated in Database",'form':form,'invoice_no':invoice.invoice_no,'rooms':Room.objects.all()})
+            return render(request,'invoiceform.html',{'edit':True,'tag':"Edit Invoice",'msg':"Invoice Updated in Database",'form':form,'invoice_no':invoice.invoice_no,'rooms':Room.objects.all()})
 
-    return render(request,'invoiceform.html',{'tag':"Edit Invoice",'form':form,'invoice_no':invoice.invoice_no,'invoice_no':invoice.invoice_no,'rooms':Room.objects.all()})
+    return render(request,'invoiceform.html',{'edit':True,'tag':"Edit Invoice",'form':form,'invoice_no':invoice.invoice_no,'rooms':Room.objects.all()})
 
 
 def view_invoice(request):

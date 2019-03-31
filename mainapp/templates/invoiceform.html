@@ -2,7 +2,7 @@
 
 {% load crispy_forms_tags %}
 
-{% block content %}
+{% block content1 %}
 
 <div class="container"><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <h1><b>Error: 404 </b> [PAGE NOT FOUND]</h1>
@@ -13,7 +13,7 @@
 {% endblock %}
 
 
-{% block content1 %}
+{% block content %}
 <div class="container">
     <h3 class="text-center">{{tag}}</h3>
     {% if msg %} <div class="alert alert-success">{{msg}}</div> {% endif %}
@@ -51,14 +51,15 @@
         
     
         <div class="col-4">{{form.discount | as_crispy_field}}</div>
-        <div class="col-4 mt-4">{{form.is_gst | as_crispy_field}}</div>
+        <div class="col-7">{{form.remark | as_crispy_field}}</div>
+        <div class="col-1 mt-5">{{form.is_gst | as_crispy_field}}</div>
         
         
 
     <div class="container">
     <div class="row justify-content-end">
-        <button class="btn btn-lg btn-secondary mr-2" type="submit">Save</button>
- <!-- {% if invoice_no %}<a href="{% url 'printinvcc' invoice_no %}" class="btn btn-lg btn-secondary mr-2" target="_blank">Print Customer Copy</a>{% endif %} -->
+        <button class="btn btn-lg btn-secondary btn-block mr-2 mb-3" type="submit">Save</button>
+        {% if invoice_no %}<a href="{% url 'printinvcc' invoice_no %}" class="btn btn-lg btn-secondary mr-2" target="_blank">Print Customer Copy</a>{% endif %}
         {% if invoice_no %}<a href="{% url 'printinvhc' invoice_no %}" class="btn btn-lg btn-secondary" target="_blank">Print Hotel Copy</a>{% endif %}
     </div>
     </div>

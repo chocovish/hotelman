@@ -19,25 +19,26 @@ class Invoice(models.Model):
     date = models.DateField()
 
     room_no = models.CharField(max_length=7)
-    check_in = models.DateField()
-    check_out = models.DateField()
+    check_in = models.DateField(verbose_name="Room In")
+    check_out = models.DateField(verbose_name="Room Out")
     days_count = models.IntegerField()
     rate = models.IntegerField()
 
     room_no_2 = models.CharField(max_length=7,blank=True, null=True)
-    check_in_2 = models.DateField(blank=True, null=True)
-    check_out_2 = models.DateField(blank=True, null=True)
+    check_in_2 = models.DateField(blank=True, null=True, verbose_name="Room In 2")
+    check_out_2 = models.DateField(blank=True, null=True, verbose_name="Room out 2")
     days_count_2 = models.IntegerField(default=0)
     rate_2 = models.IntegerField(default=0)
 
 
     room_no_3 = models.CharField(max_length=7,blank=True, null=True)
-    check_in_3 = models.DateField(blank=True, null=True)
-    check_out_3 = models.DateField(blank=True, null=True)
+    check_in_3 = models.DateField(blank=True, null=True, verbose_name="Room In 3")
+    check_out_3 = models.DateField(blank=True, null=True, verbose_name="Room out 3")
     days_count_3 = models.IntegerField(default=0)
     rate_3 = models.IntegerField(default=0)
 
     discount = models.IntegerField(default=0)
+    remark = models.CharField(max_length=50,null=True,blank=True)
     is_gst = models.BooleanField(default=False)
 
     def gst(self):
@@ -52,6 +53,18 @@ class Invoice(models.Model):
     def total_3(self): return (self.rate_3*self.days_count_3)
     
     def total_with_gst(self): return (self.total() + self.total_2() + self.total_3() + self.gst()*2) - self.discount
+    def total_days(self): return self.days_count + self.days_count_2 + self.days_count_3
+
+    def final_checkout(self):
+        if self.check_out_3: return self.check_out_3
+        elif self.check_out_2: return self.check_out_2
+        else: return self.check_out
+
+    def room_change(self):
+        if self.check_in_3: return [self.check_in_3,self.check_in_2]
+        elif self.check_in_2: return [self.check_in_2]
+        else: return [None]
+        
     
     def __str__(self): return self.name+ " " + self.room_no
 

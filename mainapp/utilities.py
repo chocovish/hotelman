@@ -73,7 +73,7 @@ def gen_inv(o,copy='cc'):
         draw.text((158,386),str(o.name),fill="rgb(0,0,0)",font=font)
         draw.text((219,421),str(o.phone),fill="rgb(0,0,0)",font=font)
         draw.text((187,460),str(o.address),fill="rgb(0,0,0)",font=font)
-        draw.text((221,327),str(o.invoice_no),fill="rgb(0,0,0)",font=font)
+        draw.text((221,325),str(o.invoice_no),fill="rgb(0,0,0)",font=font)
         draw.text((1290,316),dateformat(o.date.isoformat()),fill="rgb(0,0,0)",font=font)
         draw.text((1080,376),o.company_name if o.company_name else "",fill="rgb(0,0,0)",font=font)
         draw.text((1000,415),o.gstin if o.gstin else "",fill="rgb(0,0,0)",font=font)
@@ -114,5 +114,9 @@ def gen_inv(o,copy='cc'):
         draw.text((1280,797),str(o.gst()),fill="rgb(0,0,0)",font=font)
         draw.text((1280,834),str(o.gst()),fill="rgb(0,0,0)",font=font)
         draw.text((1280,870),str(o.total_with_gst()),fill="rgb(0,0,0)",font=font)
+
+        draw.text((184,759),str(o.check_in),fill="rgb(0,0,0)",font=font)
+        draw.text((661,759),str(o.final_checkout()),fill="rgb(0,0,0)",font=font)
+        draw.text((1122,921),str(o.remark),fill="rgb(0,0,0)",font=font)
         im.save(op)
 
