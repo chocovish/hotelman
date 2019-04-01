@@ -71,16 +71,16 @@ def gen_inv(o,copy='cc'):
         draw = ImageDraw.Draw(im)
         font = ImageFont.truetype("robold.ttf",size=28)
         draw.text((158,386),str(o.name),fill="rgb(0,0,0)",font=font)
-        draw.text((219,421),str(o.phone),fill="rgb(0,0,0)",font=font)
-        draw.text((187,460),str(o.address),fill="rgb(0,0,0)",font=font)
+        draw.text((219,421),o.phone if o.phone else "",fill="rgb(0,0,0)",font=font)
+        draw.text((187,460),o.address if o.address else "",fill="rgb(0,0,0)",font=font)
         draw.text((221,325),str(o.invoice_no),fill="rgb(0,0,0)",font=font)
         draw.text((1290,316),dateformat(o.date.isoformat()),fill="rgb(0,0,0)",font=font)
         draw.text((1080,376),o.company_name if o.company_name else "",fill="rgb(0,0,0)",font=font)
         draw.text((1000,415),o.gstin if o.gstin else "",fill="rgb(0,0,0)",font=font)
         #room_1
         draw.text((60,562),o.room_no,fill="rgb(0,0,0)",font=font)
-        font = ImageFont.truetype("robold.ttf",size=26)
-        draw.text((221,562),desc,fill="rgb(0,0,0)",font=font)
+        font = ImageFont.truetype("robold.ttf",size=24)
+        draw.text((215,562),desc,fill="rgb(0,0,0)",font=font)
         font = ImageFont.truetype("robold.ttf",size=28)
         draw.text((560,562),dateformat(o.check_in.isoformat()),fill="rgb(0,0,0)",font=font)
         draw.text((732,562),dateformat(o.check_out.isoformat()),fill="rgb(0,0,0)",font=font)
@@ -90,8 +90,8 @@ def gen_inv(o,copy='cc'):
         #room_2
         if o.room_no_2:
             draw.text((60,612),o.room_no_2,fill="rgb(0,0,0)",font=font)
-            font = ImageFont.truetype("robold.ttf",size=26)
-            draw.text((221,612),desc2,fill="rgb(0,0,0)",font=font)
+            font = ImageFont.truetype("robold.ttf",size=24)
+            draw.text((215,612),desc2,fill="rgb(0,0,0)",font=font)
             font = ImageFont.truetype("robold.ttf",size=28)
             draw.text((560,612),dateformat(o.check_in_2.isoformat()),fill="rgb(0,0,0)",font=font)
             draw.text((732,612),dateformat(o.check_out_2.isoformat()),fill="rgb(0,0,0)",font=font)
@@ -101,8 +101,8 @@ def gen_inv(o,copy='cc'):
         #room_3
         if o.room_no_3:
             draw.text((60,662),o.room_no_3,fill="rgb(0,0,0)",font=font)
-            font = ImageFont.truetype("robold.ttf",size=26)
-            draw.text((221,662),desc3,fill="rgb(0,0,0)",font=font)
+            font = ImageFont.truetype("robold.ttf",size=24)
+            draw.text((215,662),desc3,fill="rgb(0,0,0)",font=font)
             font = ImageFont.truetype("robold.ttf",size=28)
             draw.text((560,662),dateformat(o.check_in_3.isoformat()),fill="rgb(0,0,0)",font=font)
             draw.text((732,662),dateformat(o.check_out_3.isoformat()),fill="rgb(0,0,0)",font=font)
