@@ -20,6 +20,7 @@
             <th scope="col">Discount</th>
             <th scope="col">Total</th>
             <th scope="col">Is GST</th>
+            <th scope="col">Edit</th>
             
         </thead>
         <tbody>
@@ -33,12 +34,13 @@
                 <td>{{obj.gstin}}</td>
                 <td>{{obj.room_no}}</td>
                 <td>{{obj.check_in}}</td>
-                <td>{{obj.check_out}}</td>
-                <td>{{obj.days_count}}</td>
+                <td>{{obj.final_checkout}}</td>
+                <td>{{obj.total_days}}</td>
                 <td>{{obj.rate}}</td>
                 <td>{{obj.discount}}</td>
                 <td>{{obj.total}}</td>
                 <td>{{obj.is_gst}}</td>
+                <td><a href="{% url 'editinvoice' obj.invoice_no %}">Edit</a></td>
                 
             </tr>
 
