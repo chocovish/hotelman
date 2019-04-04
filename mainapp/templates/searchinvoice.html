@@ -13,6 +13,30 @@
 {% block content %}
 
 <div class="container">
+
+<form action="" method="post" class="form-row">
+        {% csrf_token %}
+          <div class="form-group col-12">
+            <label for="todate">Search By Name</label>
+            <input type="text" class="form-control" id="fromdate" placeholder="Enter Customer Name" name="q" required>
+            <input type="hidden" name="filter" value="name">
+          </div>
+
+          <button class="btn btn-lg btn-primary px-5" type="submit">Search</button>
+</form>
+<hr>
+<form action="" method="post" class="form-row">
+        {% csrf_token %}
+          <div class="form-group col-12">
+            <label for="todate">Search By Invoice No.</label>
+            <input type="text" class="form-control" id="fromdate" placeholder="Enter Invoice No" name="q" required>
+            <input type="hidden" name="filter" value="invoice">
+          </div>
+          <button class="btn btn-lg btn-primary px-5" type="submit">Search</button>
+</form>
+
+<hr>
+
     <form action="" method="post" class="form-row">
         {% csrf_token %}
         <div class="form-group col-6">
@@ -22,6 +46,7 @@
           <div class="form-group col-6">
             <label for="todate">To Date</label>
             <input type="date" class="form-control" id="fromdate" placeholder="To Date" name="tdate" required>
+            <input type="hidden" name="filter">
           </div>
           <button class="btn btn-lg btn-primary px-5" type="submit">Search</button>
     </form>
