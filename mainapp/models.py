@@ -53,6 +53,7 @@ class Invoice(models.Model):
     def total_3(self): return (self.rate_3*self.days_count_3)
     
     def total_with_gst(self): return (self.total() + self.total_2() + self.total_3() + self.gst()*2) - self.discount
+    def total_without_gst(self): return self.total() + self.total_2() + self.total_3() - self.discount
     def total_days(self): return self.days_count + self.days_count_2 + self.days_count_3
 
     def final_checkout(self):
