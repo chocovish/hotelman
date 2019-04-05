@@ -45,7 +45,7 @@ def gen_moneyreciept(request):
         draw.text((759,457),name,fill="rgb(0,0,0)",font=font)
         draw.text((523,527),amount+"/-",fill="rgb(0,0,0)",font=font)
         draw.text((1439,336),room,fill="rgb(0,0,0)",font=font)
-        draw.text((1369,280),date,fill="rgb(0,0,0)",font=font)
+        draw.text((1369,280),dateformat(date),fill="rgb(0,0,0)",font=font)
         draw.text((356,284),recieptno,fill="rgb(0,0,0)",font=font)
         draw.text((455,745),num2words(int(amount)) + " only",fill="rgb(0,0,0)",font=font)
         im.save("mainapp/static/moneyreciept.jpeg")
