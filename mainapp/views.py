@@ -81,8 +81,10 @@ def search_invoice(request):
         wgst = 0
         wogst = 0
         tgst = 0
+        wgstwogst = 0
         for o in objects:
             if o.is_gst==True:
+                wgstwogst = wgstwogst+o.total_without_gst()
                 wgst = wgst+o.total_with_gst()
                 tgst = tgst+o.gst()
             else: wogst = wogst+o.total_with_gst()
