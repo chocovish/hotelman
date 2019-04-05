@@ -12,7 +12,7 @@ urlpatterns = [
     path('accounts/searchbyno/', views.searchbyno,name="searchbyno"),
     path('accounts/printinvcc/<invoice_no>/', views.print_inv_cc,name="printinvcc"),
     path('accounts/printinvhc/<invoice_no>/', views.print_inv_hc,name="printinvhc"),
-    #path('accounts/makeduesbill/', views.make_duesbill,name="makeduesbill"),
-    #path('accounts/makemoneyreciept/', views.make_moneyreciept,name="makemoneyreciept"),
+    path('accounts/makeduesbill/', views.make_duesbill,name="makeduesbill"),
+    path('accounts/makemoneyreciept/', views.make_moneyreciept,name="makemoneyreciept"),
     path('accounts/imageview/', views.image_view,name="imageview"),
 ]

@@ -74,18 +74,18 @@ def print_inv_hc(request,invoice_no):
 def search_invoice(request):
     if request.method=="POST":
         if request.POST['filter']=='name':
-            print("Hello")
             objects = Invoice.objects.filter(name__contains=request.POST['q'])
-            print(objects)
         elif request.POST['filter']=='invoice': objects = Invoice.objects.filter(invoice_no=request.POST['q'])
         form = SearchByDateForm(request.POST)
         if form.is_valid(): objects = Invoice.objects.filter(date__range=(form.cleaned_data['fdate'],form.cleaned_data['tdate']))
         wgst = 0
         wogst = 0
+        tgst = 0
         for o in objects:
+            tgst += o.gst()
             if o.is_gst==True: wgst = wgst+o.total_with_gst()
             else: wogst = wogst+o.total_with_gst()
-        return render(request,'searchinvoice.html',{'objects':objects,'total':wgst+wogst,'wgst':wgst,'wogst':wogst})
+        return render(request,'searchinvoice.html',{'objects':objects,'total':wgst+wogst,'wgst':wgst,'wogst':wogst,'tgst':tgst,'wgstwogst':wgst-tgst})
     return render(request,'searchinvoice.html')
 
 

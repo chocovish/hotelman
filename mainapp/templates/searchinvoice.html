@@ -73,7 +73,7 @@
             <th scope="col">Discount</th>
             <th scope="col">Total</th>
             <th scope="col">Is GST</th>
-            <th scope="col">Edit</th>
+            <!-- <th scope="col">Edit</th> -->
         </thead>
         <tbody>
             {% for obj in objects %}
@@ -93,14 +93,17 @@
                 <td>{{obj.discount}}</td>
                 <td>{{obj.total_with_gst}}</td>
                 <td>{{obj.is_gst}}</td>
-                <td><a href="{% url 'editinvoice' obj.pk %}">Edit</a></td>
+                <!-- <td><a href="{% url 'editinvoice' obj.pk %}">Edit</a></td> -->
             </tr>
             {% endfor %}
         </tbody>
     </table>
-<h4 class="text-center">Grand Total: {{total}}</h4>
-<h4 class="text-center">Total of GST Bills: {{wgst}}</h4>
+
 <h4 class="text-center">Total of Non GST Bills: {{wogst}}</h4>
+<h5 class="text-center">Total of GST Bills without GST: {{wgstwogst}} | Total GST Paid: {{tgst}}</h5>
+<h4 class="text-center">Total of GST Bills with GST: {{wgst}}</h4>
+<h2 class="text-center">Grand Total: {{total}}</h2>
+
 {% endif %}
 
 </div>
