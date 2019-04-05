@@ -88,7 +88,7 @@ def search_invoice(request):
                 wgst = wgst+o.total_with_gst()
                 tgst = tgst+o.gst()
             else: wogst = wogst+o.total_with_gst()
-        return render(request,'searchinvoice.html',{'objects':objects,'total':wgst+wogst,'wgst':wgst,'wogst':wogst,'tgst':tgst,'wgstwogst':wgst-tgst})
+        return render(request,'searchinvoice.html',{'objects':objects,'total':wgst+wogst,'wgst':wgst,'wogst':wogst,'tgst':tgst,'wgstwogst':wgstwogst})
     return render(request,'searchinvoice.html')
 
 
