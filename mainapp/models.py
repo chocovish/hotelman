@@ -9,7 +9,7 @@ class Room(models.Model):
         return self.room_no + " " + self.description
 
 class Invoice(models.Model):
-    invoice_no = models.CharField(max_length=10,unique=True)
+    invoice_no = models.CharField(max_length=30,unique=True)
     name = models.CharField(max_length=30)
     company_name = models.CharField(max_length=30,null=True,blank=True)
     address = models.CharField(max_length=60,null=True,blank=True)
