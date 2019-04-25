@@ -85,8 +85,8 @@ def gen_inv(o,copy='cc'):
         draw.text((560,562),dateformat(o.check_in.isoformat()),fill="rgb(0,0,0)",font=font)
         draw.text((732,562),dateformat(o.check_out.isoformat()),fill="rgb(0,0,0)",font=font)
         draw.text((916,562),str(o.days_count),fill="rgb(0,0,0)",font=font)
-        draw.text((1080,562),str(o.rate/1),fill="rgb(0,0,0)",font=font)
-        draw.text((1280,562),str(o.total()/1),fill="rgb(0,0,0)",font=font)
+        draw.text((1080,562),format(o.rate,'.2f'),fill="rgb(0,0,0)",font=font)
+        draw.text((1280,562),format(o.total(),'.2f'),fill="rgb(0,0,0)",font=font)
         #room_2
         if o.room_no_2:
             draw.text((60,612),o.room_no_2,fill="rgb(0,0,0)",font=font)
@@ -96,8 +96,8 @@ def gen_inv(o,copy='cc'):
             draw.text((560,612),dateformat(o.check_in_2.isoformat()),fill="rgb(0,0,0)",font=font)
             draw.text((732,612),dateformat(o.check_out_2.isoformat()),fill="rgb(0,0,0)",font=font)
             draw.text((916,612),str(o.days_count_2),fill="rgb(0,0,0)",font=font)
-            draw.text((1080,612),str(o.rate_2/1),fill="rgb(0,0,0)",font=font)
-            draw.text((1280,612),str(o.total_2()/1),fill="rgb(0,0,0)",font=font)
+            draw.text((1080,612),format(o.rate_2,'.2f'),fill="rgb(0,0,0)",font=font)
+            draw.text((1280,612),format(o.total_2(),'.2f'),fill="rgb(0,0,0)",font=font)
         #room_3
         if o.room_no_3:
             draw.text((60,662),o.room_no_3,fill="rgb(0,0,0)",font=font)
@@ -107,13 +107,13 @@ def gen_inv(o,copy='cc'):
             draw.text((560,662),dateformat(o.check_in_3.isoformat()),fill="rgb(0,0,0)",font=font)
             draw.text((732,662),dateformat(o.check_out_3.isoformat()),fill="rgb(0,0,0)",font=font)
             draw.text((916,662),str(o.days_count_3),fill="rgb(0,0,0)",font=font)
-            draw.text((1080,662),str(o.rate_3/1),fill="rgb(0,0,0)",font=font)
-            draw.text((1280,662),str(o.total_3()/1),fill="rgb(0,0,0)",font=font)
+            draw.text((1080,662),format(o.rate_3,'.2f'),fill="rgb(0,0,0)",font=font)
+            draw.text((1280,662),format(o.total_3(),'.2f'),fill="rgb(0,0,0)",font=font)
 
-        draw.text((1280,759),str((o.total()+o.total_2()+o.total_3())/1),fill="rgb(0,0,0)",font=font)
-        draw.text((1280,797),str(o.gst()),fill="rgb(0,0,0)",font=font)
-        draw.text((1280,834),str(o.gst()),fill="rgb(0,0,0)",font=font)
-        draw.text((1280,870),str(o.total_with_gst()),fill="rgb(0,0,0)",font=font)
+        draw.text((1280,759),format((o.total()+o.total_2()+o.total_3()),'.2f'),fill="rgb(0,0,0)",font=font)
+        draw.text((1280,797),format(o.gst(),'.2f'),fill="rgb(0,0,0)",font=font)
+        draw.text((1280,834),format(o.gst(),'.2f'),fill="rgb(0,0,0)",font=font)
+        draw.text((1280,870),format(o.total_with_gst(),'.2f'),fill="rgb(0,0,0)",font=font)
 
         draw.text((184,759),dateformat(o.check_in),fill="rgb(0,0,0)",font=font)
         draw.text((661,759),dateformat(o.final_checkout()),fill="rgb(0,0,0)",font=font)
