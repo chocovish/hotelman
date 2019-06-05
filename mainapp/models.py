@@ -56,6 +56,20 @@ class Invoice(models.Model):
     def total_without_gst(self): return self.total() + self.total_2() + self.total_3() - self.discount
     def total_days(self): return self.days_count + self.days_count_2 + self.days_count_3
 
+    def gstable(self):
+        ret = 0
+        if self.rate>=1000: ret += (self.rate * self.days_count)
+        if self.rate_2>=1000: ret += (self.rate_2 * self.days_count_2)
+        if self.rate_3>=1000: ret += (self.rate_3 * self.days_count_3)
+        return ret
+    
+    def nongstable(self):
+        ret = 0
+        if self.rate<1000: ret += (self.rate *self.days_count)
+        if self.rate_2<1000: ret += (self.rate_2*self.days_count_2)
+        if self.rate_3<1000: ret += (self.rate_3*self.days_count_3)
+        return ret
+    
     def final_checkout(self):
         if self.check_out_3: return self.check_out_3
         elif self.check_out_2: return self.check_out_2
